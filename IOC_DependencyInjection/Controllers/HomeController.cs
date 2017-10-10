@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using IOC_DependencyInjection.Repositories;
 using System.Web.Mvc;
 
 namespace IOC_DependencyInjection.Controllers
 {
     public class HomeController : Controller
     {
+        private IData _repositories;
+
+        public HomeController(IData repository)
+        {
+            _repositories = repository;
+        }
+
+
         public ActionResult Index()
         {
+            ViewBag.Data = _repositories.Names();
             return View();
         }
 
